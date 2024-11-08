@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <style>
+       
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #fffefe;
+        }
+        form {
+            background: #6113e712;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgb(64, 4, 242);
+            width: 300px;
+        }
+        label, input, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        button {
+            background: #3208ec;
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #850eee;
+        }
+    </style>
+</head>
+<body>
+
+<form id="authForm" onsubmit="return validarFormulario()">
+    <h2>preencha o formulario</h2>
+    <label for="username">Usuário:</label>
+    <input type="text" id="username"  placeholder="username">
+
+    <label for="password">Senha:</label>
+    <input type="password" id="password" placeholder="password">
+
+    <button type="button" onclick="registrar()">Registrar-se</button>
+    <button type="submit">Login</button>
+   
+</form>
+<script>
+   
+    function registrar() {
+        const usuario = document.getElementById("username").value;
+        const senha = document.getElementById("password").value;
+        
+        if (usuario === "" || senha === "") {
+            alert("Por favor, preencha todos os campos para se registrar!");
+            return;
+        }
+
+       
+        localStorage.setItem("username", usuario);
+        localStorage.setItem("password", senha);
+
+        alert("Cadastro bem-sucedido!");
+       
+        document.getElementById("authForm").reset();
+    }
+
+    
+    function validarFormulario() {
+        const usuario = document.getElementById("username").value;
+        const senha = document.getElementById("password").value;
+
+        
+        if (usuario === "" || senha === "") {
+            alert("Por favor, preencha todos os campos!");
+            return false;
+        }
+
+        
+        const usuarioRegistrado = localStorage.getItem("username");
+        const senhaRegistrada = localStorage.getItem("password");
+
+        if (usuario === usuarioRegistrado && senha === senhaRegistrada) {
+            
+            window.location.href = "http://127.0.0.1:5500/index2.html";
+            return false; 
+        } else {
+            alert("Usuário ou senha incorretos.");
+            return false;
+        }
+    }
+</script>
+
+</body>
+</html>
